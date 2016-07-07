@@ -3,6 +3,7 @@ package xyz.lklinker.dropbox_example.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.VisibleForTesting;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
@@ -18,6 +19,9 @@ public class DropboxUtil {
     private static final String APP_KEY = BuildConfig.APP_KEY;
     private static final String APP_SECRET = BuildConfig.APP_SECRET;
 
+    @VisibleForTesting
+    protected static final String PREF_KEY = "dropbox_oauth_access";
+
     // this should match the redirect from the API Console
     // it can be whatever you choose
     public static final String REDIRECT_URL = "https://www.dropbox.com/1/oauth2/redirect_receiver";
@@ -27,12 +31,10 @@ public class DropboxUtil {
                     "&response_type=token" +
                     "&redirect_uri=" + REDIRECT_URL;
 
-    private Context context;
     private SharedPreferences sharedPreferences;
 
     public DropboxUtil(Context context) {
-        this.context = context;
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = context.getSharedPreferences("shared_prefs", Context.MODE_PRIVATE);
     }
 
     public DropboxAPI<AndroidAuthSession> getDropboxApi() {
@@ -50,8 +52,9 @@ public class DropboxUtil {
         return !getOauthAccessToken().isEmpty();
     }
 
-    private String getOauthAccessToken() {
-        return sharedPreferences.getString("dropbox_oauth_access", "");
+    @VisibleForTesting
+    protected String getOauthAccessToken() {
+        return sharedPreferences.getString(PREF_KEY, "");
     }
 
     public String extractAccessToken(String redirectUrl) {
@@ -68,7 +71,7 @@ public class DropboxUtil {
     public void saveAccessToken(String oauthAccessToken) {
         sharedPreferences
                 .edit()
-                .putString("dropbox_oauth_access", oauthAccessToken)
+                .putString(PREF_KEY, oauthAccessToken)
                 .commit();
     }
 }
