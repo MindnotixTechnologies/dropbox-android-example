@@ -1,14 +1,11 @@
 package xyz.lklinker.dropbox_example.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import java.io.File;
 
 import xyz.lklinker.dropbox_example.service.DropboxUploadService;
 import xyz.lklinker.dropbox_example.util.DropboxUtil;
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     public void checkLogin(Activity context, DropboxUtil utils) {
         if (!utils.isLoggedIn()) {
             context.startActivityForResult(
-                    new Intent(this, DropboxLoginWebviewActivity.class),
+                    new Intent(this, DropboxLoginActivity.class),
                     DROPBOX_LOGIN_REQUEST
             );
         }

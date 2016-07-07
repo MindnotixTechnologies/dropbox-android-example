@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.DropboxLoginWebviewActivity" />
+        <activity android:name=".activity.DropboxLoginActivity" />
 
         <service android:name=".service.DropboxUploadService" />
 

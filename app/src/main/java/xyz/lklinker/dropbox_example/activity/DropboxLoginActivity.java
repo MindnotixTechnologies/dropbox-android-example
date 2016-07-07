@@ -7,7 +7,7 @@ import xyz.lklinker.dropbox_example.R;
 import xyz.lklinker.dropbox_example.util.DropboxUtil;
 import xyz.lklinker.dropbox_example.widget.DropboxLoginWebView;
 
-public class DropboxLoginWebviewActivity extends AppCompatActivity {
+public class DropboxLoginActivity extends AppCompatActivity {
 
     private DropboxLoginWebView webView;
     private DropboxUtil utils;
