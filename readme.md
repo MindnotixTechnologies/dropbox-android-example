@@ -2,6 +2,8 @@
 
 Demonstrates the authentication flow using a WebView (instead of redirecting to the Dropbox app or Chrome) and file upload API for Dropbox. This is just an example app, to be integrated into a client project in the future.
 
+It also has a nice clean way of managing API keys for an open source app, as described below. 
+
 ## Setup
 
 First, check here to get your API keys from Dropbox for your application: https://www.dropbox.com/developers/apps
