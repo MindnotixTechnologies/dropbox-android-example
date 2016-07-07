@@ -1,5 +1,7 @@
 package xyz.lklinker.dropbox_example.activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +16,12 @@ import xyz.lklinker.dropbox_example.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int DROPBOX_LOGIN_REQUEST = 1;
-    private static final int PICK_FILE_REQUEST = 2;
+    protected static final int DROPBOX_LOGIN_REQUEST = 1;
+    protected static final int PICK_FILE_REQUEST = 2;
 
     private DropboxUtil utils;
+
+    private Button uploadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +31,10 @@ public class MainActivity extends AppCompatActivity {
         utils = new DropboxUtil(this);
 
         // start the login, if the user has not already done this.
-        if (!utils.isLoggedIn()) {
-            startActivityForResult(
-                    new Intent(this, DropboxLoginWebviewActivity.class),
-                    DROPBOX_LOGIN_REQUEST
-            );
-        }
 
-        Button upload = (Button) findViewById(R.id.upload_button);
-        upload.setOnClickListener(new View.OnClickListener() {
+
+        uploadButton = (Button) findViewById(R.id.upload_button);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -55,5 +54,26 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void checkLogin(Activity context, DropboxUtil utils) {
+        if (!utils.isLoggedIn()) {
+            context.startActivityForResult(
+                    new Intent(this, DropboxLoginWebviewActivity.class),
+                    DROPBOX_LOGIN_REQUEST
+            );
+        }
+    }
+
+    public Button getUploadButton() {
+        return uploadButton;
+    }
+
+    public void setDropboxUtils(DropboxUtil utils) {
+        this.utils = utils;
+    }
+
+    public DropboxUtil getUtils() {
+        return utils;
     }
 }

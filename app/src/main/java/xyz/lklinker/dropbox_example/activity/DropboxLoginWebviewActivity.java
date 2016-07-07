@@ -32,4 +32,8 @@ public class DropboxLoginWebviewActivity extends AppCompatActivity {
         });
         webView.loadUrl(DropboxUtil.AUTHORIZE_URL);
     }
+
+    public DropboxLoginWebView getWebView() {
+        return webView;
+    }
 }
