@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Dropbox Example</string>
+    <string name="upload_file">Upload File</string>
+</resources>
