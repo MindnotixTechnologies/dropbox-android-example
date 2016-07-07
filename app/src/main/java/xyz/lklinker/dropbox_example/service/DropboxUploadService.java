@@ -57,7 +57,7 @@ public class DropboxUploadService extends IntentService {
         }
     }
 
-    public String getFilePath(Uri uri) {
+    public static String getFilePath(Uri uri) {
         // yeah what a hack. Ugh i have the content provider.
         return uri.toString().replace("/document/primary:", "");
     }
