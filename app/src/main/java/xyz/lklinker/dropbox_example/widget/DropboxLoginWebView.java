@@ -2,6 +2,7 @@ package xyz.lklinker.dropbox_example.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -40,7 +41,8 @@ public class DropboxLoginWebView extends WebView {
         this.callback = callback;
     }
 
-    private WebViewClient getDropboxClient() {
+    @VisibleForTesting
+    protected WebViewClient getDropboxClient() {
         return new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
